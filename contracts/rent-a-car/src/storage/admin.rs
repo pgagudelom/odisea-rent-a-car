@@ -12,7 +12,6 @@ pub(crate) fn has_admin(env: &Env) -> bool {
 
 pub(crate) fn read_admin(env: &Env) -> Result<Address, Error> {
     let key = DataKey::Admin;
-
     env.storage().instance().get(&key).ok_or(Error::AdminNotFound)
 }
 

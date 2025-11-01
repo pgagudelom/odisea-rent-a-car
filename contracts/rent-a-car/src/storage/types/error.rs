@@ -19,4 +19,7 @@ pub enum Error {
     TokenNotFound = 12,
     AdminNotFound = 13,
     MathOverFlow = 14,
+    CommissionNotSet = 15,
+    CarNotRented = 16,  // Error cuando se intenta devolver un auto que no está rentado
+    CommissionTooHigh = 17,
 }

@@ -1,5 +1,5 @@
 use crate::{
-    storage::{car::read_car, types::car_status::CarStatus},
+    storage::{car::read_car, comission, types::car_status::CarStatus},
     tests::config::{contract::ContractTest, utils::get_contract_events},
 };
 use soroban_sdk::{
@@ -18,7 +18,7 @@ pub fn test_add_car_successfully() {
 
     let owner = Address::generate(&env);
     let price_per_day = 1500_i128;
-
+    let comission = 10_i128;
     contract
         .mock_auths(&[MockAuth {
             address: &admin,
@@ -29,7 +29,7 @@ pub fn test_add_car_successfully() {
                 sub_invokes: &[],
             },
         }])
-        .add_car(&owner, &price_per_day);
+        .add_car(&owner, &price_per_day, &comission);
 let contract_events = get_contract_events(&env, &contract.address);
     let stored_car = env.as_contract(&contract.address, || read_car(&env, &owner)).unwrap();
     
@@ -60,7 +60,7 @@ pub fn test_unauthorized_user_cannot_add_car() {
     let fake_admin = Address::generate(&env);
     let owner = Address::generate(&env);
     let price_per_day = 1500_i128;
-
+    let comission = 10_i128;
     contract
         .mock_auths(&[MockAuth {
             address: &fake_admin,
@@ -71,7 +71,7 @@ pub fn test_unauthorized_user_cannot_add_car() {
                 sub_invokes: &[],
             },
         }])
-        .add_car(&owner, &price_per_day);
+        .add_car(&owner, &price_per_day, &comission);
 }
 
 #[test]
@@ -80,8 +80,9 @@ pub fn test_add_car_with_zero_price_fails() {
     let ContractTest { contract, env, .. } = ContractTest::setup();
     let owner = Address::generate(&env);
     let price_per_day = 0_i128;
+    let comission = 10_i128;
     env.mock_all_auths();
-    contract.add_car(&owner, &price_per_day);
+    contract.add_car(&owner, &price_per_day, &comission);
 }
 
 #[test]
@@ -90,8 +91,9 @@ pub fn test_add_car_with_negative_price_fails() {
     let ContractTest { contract, env, .. } = ContractTest::setup();
     let owner = Address::generate(&env);
     let price_per_day = -100_i128;
+        let comission = 10_i128;
     env.mock_all_auths();
-    contract.add_car(&owner, &price_per_day);
+    contract.add_car(&owner, &price_per_day, &comission);
 }
 
 #[test]
@@ -100,7 +102,8 @@ pub fn test_add_car_already_exists_fails() {
     let ContractTest { contract, env, .. } = ContractTest::setup();
     let owner = Address::generate(&env);
     let price_per_day = 1500_i128;
+        let comission = 10_i128;
     env.mock_all_auths();
-    contract.add_car(&owner, &price_per_day);
-    contract.add_car(&owner, &price_per_day);
+    contract.add_car(&owner, &price_per_day, &comission);
+    contract.add_car(&owner, &price_per_day, &comission);
 }

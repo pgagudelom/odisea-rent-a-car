@@ -9,4 +9,5 @@ export interface ICar {
   pricePerDay: number;
   status: CarStatus;
   ownerAddress: string;
+  adminCommission: number;
 }

@@ -15,11 +15,11 @@ pub fn test_payout_owner_successfully() {
     let amount = 4500_i128;
     
     let (_, token_admin, _) = token;
-
+    let comission = 10_i128;
     let amount_mint = 10_000_i128;
     token_admin.mint(&renter, &amount_mint);
 
-    contract.add_car(&owner, &price_per_day);
+    contract.add_car(&owner, &price_per_day, &comission);
     contract.rental(&renter, &owner, &total_days, &amount);
 
     let contract_balance = env.as_contract(&contract.address, || read_contract_balance(&env));

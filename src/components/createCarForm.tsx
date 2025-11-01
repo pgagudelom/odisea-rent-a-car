@@ -20,6 +20,7 @@ export const CreateCarForm = ({
     pricePerDay: 0,
     ac: false,
     ownerAddress: "",
+    adminCommission: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,6 +141,31 @@ export const CreateCarForm = ({
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-1"
             />
+          </div>
+
+          <div>
+            <label
+              htmlFor="adminCommission"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Admin Commission (%)
+            </label>
+            <div className="relative mt-1">
+              <input
+                id="adminCommission"
+                name="adminCommission"
+                type="number"
+                min="0"
+                max="100"
+                step="0.1"
+                value={formData.adminCommission}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-1"
+              />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <span className="text-gray-500 sm:text-sm">%</span>
+              </div>
+            </div>
           </div>
 
           <div>

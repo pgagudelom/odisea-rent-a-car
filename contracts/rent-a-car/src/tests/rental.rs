@@ -16,9 +16,10 @@ pub fn test_rental_car_successfully() {
     let (_, token_admin, _) = token;
 
     let amount_mint = 10_000_i128;
+    let comission = 10_i128;
     token_admin.mint( &renter, &amount_mint);
 
-    contract.add_car(&owner, &price_per_day);
+    contract.add_car(&owner, &price_per_day, &comission);
 
     let initial_contract_balance = env.as_contract(&contract.address, || read_contract_balance(&env));
     assert_eq!(initial_contract_balance, 0);

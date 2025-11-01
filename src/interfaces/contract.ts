@@ -15,12 +15,22 @@ export interface IRentACarContract extends IBaseContractClient {
     token: string;
   }) => Promise<this>;
 
+  get_admin_balance: () => Promise<this>;
+
   add_car: ({
     owner,
     price_per_day,
+    commission,
   }: {
     owner: string;
     price_per_day: number;
+    commission: number;
+  }) => Promise<this>;
+
+  return_car: ({
+    owner,
+  }: {
+    owner: string;
   }) => Promise<this>;
 
   get_car_status: ({ owner }: { owner: string }) => Promise<CarStatus>;
@@ -44,6 +54,12 @@ export interface IRentACarContract extends IBaseContractClient {
     amount,
   }: {
     owner: string;
+    amount: number;
+  }) => Promise<this>;
+
+  payout_admin: ({
+    amount,
+  }: {
     amount: number;
   }) => Promise<this>;
 }

@@ -22,6 +22,7 @@ interface StellarContextType {
   getCurrentAccountData: () => IAccount | null;
   cars: ICar[];
   setCars: React.Dispatch<React.SetStateAction<ICar[]>>;
+  setAdminBalance?: React.Dispatch<React.SetStateAction<string>>; // Agregado para setAdminBalance  
 }
 
 const StellarAccountContext = createContext<StellarContextType | undefined>(

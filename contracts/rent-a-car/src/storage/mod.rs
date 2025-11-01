@@ -5,3 +5,4 @@ pub mod token;
 pub mod structs;
 pub mod types;
 pub mod contract_balance;
+pub mod comission;

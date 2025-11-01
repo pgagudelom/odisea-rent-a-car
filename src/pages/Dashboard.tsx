@@ -18,7 +18,7 @@ export default function Dashboard() {
   const { showModal, openModal, closeModal } = useModal();
 
   const handleCreateCar = async (formData: CreateCar) => {
-    const { brand, model, color, passengers, pricePerDay, ac, ownerAddress } =
+    const { brand, model, color, passengers, pricePerDay, ac, ownerAddress, adminCommission } =
       formData;
     const contractClient =
       await stellarService.buildClient<IRentACarContract>(walletAddress);
@@ -26,6 +26,7 @@ export default function Dashboard() {
     const addCarResult = await contractClient.add_car({
       owner: ownerAddress,
       price_per_day: pricePerDay * ONE_XLM_IN_STROOPS,
+      commission: adminCommission,  // Enviamos la comisión al contrato
     });
     const xdr = addCarResult.toXDR();
 
@@ -40,6 +41,7 @@ export default function Dashboard() {
       pricePerDay,
       ac,
       ownerAddress,
+      adminCommission,
       status: CarStatus.AVAILABLE,
     };
 

@@ -9,8 +9,8 @@ pub fn test_get_car_status_returns_available() {
     
     let owner = Address::generate(&env);
     let price_per_day = 1500_i128;
-
-    contract.add_car(&owner, &price_per_day);
+    let comission = 10_i128;
+    contract.add_car(&owner, &price_per_day, &comission);
 
     let status = contract.get_car_status(&owner);
     assert_eq!(status, CarStatus::Available);

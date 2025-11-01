@@ -27,8 +27,8 @@ pub fn test_remove_car_deletes_from_storage() {
     env.mock_all_auths();
     let owner = Address::generate(&env);
     let price_per_day = 1500_i128;
-
-    contract.add_car(&owner, &price_per_day);
+    let comission = 10_i128;
+    contract.add_car(&owner, &price_per_day, &comission);
     assert!(env.as_contract(&contract.address, || {
         has_car(&env, &owner)
     }));
